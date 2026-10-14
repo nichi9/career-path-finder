@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Path Finder</title>
+<style>
+*{box-sizing:border-box;font-family:Arial;margin:0}
+body{background:#f4f5fc;color:#292447}
+header{background:white;padding:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{color:#6655e8;font-size:21px;font-weight:bold}
+nav{display:flex;gap:12px;flex-wrap:wrap}
+a{color:#5145bd;text-decoration:none;font-size:13px}
+main{max-width:1000px;margin:auto;padding:18px}
+.hero{background:linear-gradient(120deg,#6554e8,#a397ff);color:white;padding:28px;border-radius:18px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.hero h1{margin-bottom:12px}
+button{background:#6554e8;color:white;padding:11px 15px;border:0;border-radius:8px;cursor:pointer;margin-top:10px}
+.hero button{background:white;color:#6554e8}
+h2{margin:25px 0 14px;font-size:21px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:white;border-radius:14px;padding:19px;box-shadow:0 3px 12px #0001;min-width:0}
+.card h3{margin:12px 0}
+p{line-height:1.6}
+.small{font-size:13px;color:#777}
+.num{font-size:27px;color:#6554e8;font-weight:bold;margin:12px 0}
+input,select{width:100%;padding:11px;margin:7px 0 14px;border:1px solid #ddd;border-radius:8px;background:white}
+label{font-size:13px;font-weight:bold}
+.tag{display:inline-block;background:#efedff;color:#6554e8;padding:5px 8px;border-radius:14px;font-size:12px;margin:3px}
+ul{padding-left:20px;line-height:1.9;font-size:13px;color:#666;margin-top:8px}
+.task{display:flex;gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid #eee;font-size:14px}
+.task input{width:18px;margin:0}
+.progress{height:10px;background:#e6e4f3;border-radius:10px;margin:12px 0}
+.bar{height:100%;background:#6554e8;border-radius:10px;width:0}
+footer{text-align:center;padding:25px;color:#777}
+@media(max-width:650px){.grid{grid-template-columns:1fr}main{padding:12px}.hero{padding:20px}.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🚀 Career Path Finder</div>
+<nav><a href="#home">Home</a><a href="#student">Profile</a><a href="#careers">Careers</a><a href="#prep">Placement Prep</a><a href="#progress">Progress</a></nav>
+</header>
+<main>
+<section class="hero" id="home">
+<div><h1 id="welcome">Hi, Student! 👋</h1>
+<p>Discover your career, improve your skills and prepare for placements.</p>
+<button onclick="document.querySelector('#careers').scrollIntoView({behavior:'smooth'})">Explore Careers →</button></div>
+<div style="font-size:55px">🎓</div>
+</section>
+
+<h2>📊 My Dashboard</h2>
+<div class="grid">
+<div class="card"><p>🎯 Career Options</p><div class="num">4</div><p class="small">Explore different career paths.</p></div>
+<div class="card"><p>✅ Tasks Completed</p><div class="num" id="count">0/8</div><p class="small">Placement checklist.</p></div>
+<div class="card" id="progress"><p>📈 Overall Progress</p><div class="num" id="percent">0%</div><div class="progress"><div class="bar" id="bar"></div></div><p class="small">Checklist completion.</p></div>
+</div>
+
+<section id="student">
+<h2>👩‍🎓 Student Details</h2>
+<div class="card">
+<form id="profile">
+<label>Full Name</label><input id="name" placeholder="Enter your name" required>
+<label>College Name</label><input id="college" placeholder="Enter college name">
+<label>Degree</label><select id="degree"><option>B.Tech CSE</option><option>B.Tech IT</option><option>BCA</option><option>Other</option></select>
+<label>Current Year</label><select id="year"><option>1st Year</option><option>2nd Year</option><option selected>3rd Year</option><option>4th Year</option></select>
+<label>Your Skills</label><input id="skills" placeholder="Python, HTML, JavaScript">
+<label>Career Interest</label><select id="interest"><option value="all">All Careers</option><option value="web">Web Development</option><option value="data">Data Analytics</option><option value="software">Software Development</option><option value="security">Cybersecurity</option></select>
+<button type="submit">Save Details</button>
+</form>
+<p class="small" id="message"></p>
+</div>
+</section>
+
+<section id="careers">
+<h2>🎯 Career Recommendations</h2>
+<div class="grid">
+<div class="card career" data-type="web"><h3>💻 Frontend Developer</h3><p class="small">Build attractive websites.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><ul><li>Learn HTML/CSS</li><li>Practice JavaScript</li><li>Build projects</li><li>Learn React</li></ul><button onclick="choose('Frontend Developer')">Choose Career</button></div>
+<div class="card career" data-type="data"><h3>📊 Data Analyst</h3><p class="small">Analyze data and discover insights.</p><span class="tag">Python</span><span class="tag">Excel</span><span class="tag">SQL</span><ul><li>Learn Excel</li><li>Practice Python</li><li>Learn SQL</li><li>Create dashboards</li></ul><button onclick="choose('Data Analyst')">Choose Career</button></div>
+<div class="card career" data-type="software"><h3>⚙️ Software Developer</h3><p class="small">Build software applications.</p><span class="tag">Java</span><span class="tag">Python</span><span class="tag">DSA</span><ul><li>Learn programming</li><li>Study DSA</li><li>Practice coding</li><li>Build projects</li></ul><button onclick="choose('Software Developer')">Choose Career</button></div>
+<div class="card career" data-type="security"><h3>🔐 Cybersecurity Analyst</h3><p class="small">Learn to protect systems.</p><span class="tag">Networking</span><span class="tag">Linux</span><ul><li>Learn networking</li><li>Practice Linux</li><li>Study security basics</li><li>Use legal labs</li></ul><button onclick="choose('Cybersecurity Analyst')">Choose Career</button></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>⭐ Selected Career</h3><p id="chosen" class="small">Choose a career above.</p></div>
+</section>
+
+<section id="prep">
+<h2>✅ Placement Preparation Checklist</h2>
+<div class="card">
+<p class="small">Tick each task when completed. Progress is updated automatically.</p>
+<div id="tasks">
+<label class="task"><input type="checkbox"> Prepare my resume</label>
+<label class="task"><input type="checkbox"> Update LinkedIn and GitHub</label>
+<label class="task"><input type="checkbox"> Practice aptitude questions</label>
+<label class="task"><input type="checkbox"> Practice coding problems</label>
+<label class="task"><input type="checkbox"> Revise data structures and algorithms</label>
+<label class="task"><input type="checkbox"> Practice communication skills</label>
+<label class="task"><input type="checkbox"> Complete a mock interview</label>
+<label class="task"><input type="checkbox"> Apply for internships and jobs</label>
+</div>
+</div>
+</section>
+
+<h2>📈 My Progress</h2>
+<div class="card">
+<h3 id="progressText">You have completed 0 of 8 tasks.</h3>
+<div class="progress"><div class="bar" id="bar2"></div></div>
+<p class="small">Keep learning every day. Small steps lead to big achievements!</p>
+<button onclick="resetTasks()">Reset Checklist</button>
+</div>
+</main>
+<footer>Career Path Finder | Plan Your Future 🚀</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let saved;
+try { saved = JSON.parse(localStorage.getItem("cpfProfile") || "{}"); } catch(e) { saved = {}; }
+
+["name","college","degree","year","skills","interest"].forEach(id=>{
+  if(saved[id] !== undefined) $(id).value = saved[id];
+});
+
+function applyProfile(){
+  if($("name").value.trim()) $("welcome").textContent="Hi, "+$("name").value.trim()+"! 👋";
+  const choice=$("interest").value;
+  document.querySelectorAll(".career").forEach(card=>{
+    card.style.display=(choice==="all"||card.dataset.type===choice)?"block":"none";
+  });
+}
+$("profile").addEventListener("submit",e=>{
+  e.preventDefault();
+  const data={};
+  ["name","college","degree","year","skills","interest"].forEach(id=>data[id]=$(id).value);
+  try { localStorage.setItem("cpfProfile",JSON.stringify(data)); } catch(e) {}
+  applyProfile();
+  $("message").textContent="Details saved successfully! 💜";
+});
+function choose(career){
+  $("chosen").textContent=career;
+  try {localStorage.setItem("cpfCareer",career);} catch(e){}
+}
+try {if(localStorage.getItem("cpfCareer")) $("chosen").textContent=localStorage.getItem("cpfCareer");} catch(e){}
+
+const boxes=[...document.querySelectorAll("#tasks input")];
+try {
+  const old=JSON.parse(localStorage.getItem("cpfTasks")||"[]");
+  boxes.forEach((b,i)=>b.checked=!!old[i]);
+} catch(e) {}
+function update(){
+  const done=boxes.filter(b=>b.checked).length;
+  const pct=Math.round(done/boxes.length*100);
+  $("count").textContent=done+"/"+boxes.length;
+  $("percent").textContent=pct+"%";
+  $("bar").style.width=pct+"%";
+  $("bar2").style.width=pct+"%";
+  $("progressText").textContent="You have completed "+done+" of "+boxes.length+" tasks.";
+  try {localStorage.setItem("cpfTasks",JSON.stringify(boxes.map(b=>b.checked));} catch(e){}
+}
+boxes.forEach(b=>b.addEventListener("change",update));
+function resetTasks(){
+  if(confirm("Reset all checklist tasks?")){
+    boxes.forEach(b=>b.checked=false);
+    update();
+  }
+}
+applyProfile();
+update();
+</script>
+</body>
+</html>
